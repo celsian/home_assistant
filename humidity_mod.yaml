@@ -1,6 +1,6 @@
 blueprint:
   name: Humidity Management Modified
-  description: Turn a fan on and off based on the difference between a humidity sensor and a baseline
+  description: Turn a fan on and off based on the difference between a humidity sensor and a baseline, toggle an input_boolean
   domain: automation
   input:
     humidity_sensor:
