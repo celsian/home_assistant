@@ -1,5 +1,5 @@
 blueprint:
-  name: Humidity Management
+  name: Humidity Management Modified
   description: Turn a fan on and off based on the difference between a humidity sensor and a baseline
   domain: automation
   input:
