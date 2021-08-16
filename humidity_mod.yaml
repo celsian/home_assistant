@@ -58,7 +58,7 @@ condition:
   - condition: template
     value_template: '{{ mode != switch_state }}'
   - condition: template
-    value_template: '{{ (mode == ''on'') or (mode == ''off'' and !input humidity_automation_boolean == ''on'') }}'
+    value_template: '{{ (mode == ''on'') or (!input humidity_automation_boolean == ''on'') }}'
 action:
   - service: switch.turn_{{mode}}
     entity_id: !input fan_switch
