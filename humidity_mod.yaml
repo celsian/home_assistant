@@ -58,7 +58,7 @@ condition:
   - condition: template
     value_template: '{{ mode != switch_state }}'
   - condition: template
-    value_template: '{{ mode == ''off'' and humidity_automation_boolean == ''on'' }}'
+    value_template: '{{ (mode == ''on'') or (mode == ''off'' and humidity_automation_boolean == ''on'') }}'
 action:
   - service: switch.turn_{{mode}}
     entity_id: !input fan_switch
@@ -76,4 +76,3 @@ variables:
     difference: '{{ states(humidity_sensor)|float - (states(reference_humidity_sensor)|float or reference_humidity|float) }}'
     mode: '{% if switch_state == ''off'' and difference|float > rising_threshold|float %}on{% elif switch_state == ''on'' and difference|float > falling_threshold|float %}on{% else %}off{% endif %}'
 mode: single
-
