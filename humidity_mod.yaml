@@ -62,10 +62,10 @@ condition:
     - condition: or
       conditions:
         - condition: template
-            value_template: '{{ mode == ''on'' }}'
+          value_template: '{{ mode == ''on'' }}'
         - condition: state
-            entity_id: input_boolean.humidity_automation_active
-            state: "on"
+          entity_id: input_boolean.humidity_automation_active
+          state: "on"
 action:
   - service: switch.turn_{{mode}}
     entity_id: !input fan_switch
