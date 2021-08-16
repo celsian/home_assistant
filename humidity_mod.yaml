@@ -76,3 +76,4 @@ variables:
     difference: '{{ states(humidity_sensor)|float - (states(reference_humidity_sensor)|float or reference_humidity|float) }}'
     mode: '{% if switch_state == ''off'' and difference|float > rising_threshold|float %}on{% elif switch_state == ''on'' and difference|float > falling_threshold|float %}on{% else %}off{% endif %}'
 mode: single
+
