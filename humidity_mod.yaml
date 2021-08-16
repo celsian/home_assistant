@@ -57,7 +57,7 @@ trigger:
 condition:
   - condition: template
     value_template: '{{ mode != switch_state }}'
-  -condition: template
+  - condition: template
     value_template: '{{ mode == ''off'' and humidity_automation_boolean == ''on'' }}'
 action:
   - service: switch.turn_{{mode}}
