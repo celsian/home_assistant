@@ -76,7 +76,6 @@ variables:
     humidity_sensor: !input humidity_sensor
     reference_humidity_sensor: !input reference_humidity_sensor
     fan_switch: !input fan_switch
-    humidity_automation_boolean: !input humidity_automation_boolean
     switch_state: '{{ states(fan_switch) }}'
     rising_threshold: !input rising_threshold
     falling_threshold: !input falling_threshold
