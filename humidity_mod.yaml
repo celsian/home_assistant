@@ -54,12 +54,13 @@ trigger:
     platform: state
   - entity_id: !input reference_humidity_sensor
     platform: state
-conditions:
+condition:
   condition: and
-  - condition: template
-    value_template: '{{ mode != switch_state }}'
-  - condition: template
-    value_template: '{{ mode == ''on'' or humidity_automation_boolean == ''on'' }}'
+  conditions:
+    - condition: template
+      value_template: '{{ mode != switch_state }}'
+    - condition: template
+      value_template: '{{ mode == ''on'' or humidity_automation_boolean == ''on'' }}'
 action:
   - service: switch.turn_{{mode}}
     entity_id: !input fan_switch
