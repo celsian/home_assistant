@@ -42,7 +42,7 @@ blueprint:
             min: 0
             max: 100
         default: 3
-    user_input_boolean:
+    humidity_automation_boolean:
         name: Input Boolean Toggle
         description: Input Boolean to signify the state of the automation.
         selector:
@@ -57,22 +57,22 @@ trigger:
 condition:
   - condition: template
     value_template: '{{ mode != switch_state }}'
+  -condition: template
+    value_template: '{{ mode == ''off'' and humidity_automation_boolean == ''on'' }}'
 action:
   - service: switch.turn_{{mode}}
     entity_id: !input fan_switch
-  - service: input_boolean.toggle
+  - service: input_boolean.turn_{{mode}}
     entity_id: !input user_input_boolean
 variables:
     reference_humidity: !input reference_humidity
     humidity_sensor: !input humidity_sensor
     reference_humidity_sensor: !input reference_humidity_sensor
     fan_switch: !input fan_switch
+    humidity_automation_boolean: !input humidity_automation_boolean
     switch_state: '{{ states(fan_switch) }}'
     rising_threshold: !input rising_threshold
     falling_threshold: !input falling_threshold
-    difference: '{{ states(humidity_sensor)|float - (states(reference_humidity_sensor)|float
-      or reference_humidity|float) }}'
-    mode: '{% if switch_state == ''off'' and difference|float > rising_threshold|float %}on{%
-      elif switch_state == ''on'' and difference|float > falling_threshold|float %}on{% else %}off{%
-      endif %}'
+    difference: '{{ states(humidity_sensor)|float - (states(reference_humidity_sensor)|float or reference_humidity|float) }}'
+    mode: '{% if switch_state == ''off'' and difference|float > rising_threshold|float %}on{% elif switch_state == ''on'' and difference|float > falling_threshold|float %}on{% else %}off{% endif %}'
 mode: single
