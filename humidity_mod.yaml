@@ -63,7 +63,7 @@ action:
   - service: switch.turn_{{mode}}
     entity_id: !input fan_switch
   - service: input_boolean.turn_{{mode}}
-    entity_id: !input user_input_boolean
+    entity_id: !input humidity_automation_boolean
 variables:
     reference_humidity: !input reference_humidity
     humidity_sensor: !input humidity_sensor
